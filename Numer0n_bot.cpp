@@ -131,8 +131,11 @@ int main(){
     int cand[1000];
     int eat,bite,number;
     init(cand);
-    while(1){
+    for(int i=0;;i++){
+    if(i==0){number=12;}
+    else{    
     number=search(cand);
+    }
     if(number<100){    
     printf("Your_Number is 0%d ?\n",number);
     }
