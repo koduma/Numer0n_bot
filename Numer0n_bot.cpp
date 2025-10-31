@@ -107,9 +107,9 @@ int search(int cand[1000]){
     int ret_number=-1;
 
     for(int i=0;i<1000;i++){
-        int cost=0;
+        int cost=-1;
         for(int j=0;j<1000;j++){
-            if(cand[i]==1&&cand[j]==1){
+            if(cand[j]==1){
             int tmp_cand[1000];
             memcpy(tmp_cand,cand,sizeof(tmp_cand));
             filter(tmp_cand,calc_eat(i,j),calc_bite(i,j),i);
@@ -117,7 +117,10 @@ int search(int cand[1000]){
             if(ev>cost){cost=ev;}    
             }
         }
-        if(cand[i]==1){
+        int n1=i/100;
+        int n2=(i%100)/10;
+        int n3=(i%10);
+        if(n1!=n2&&n1!=n3&&n2!=n3&&cost>=0){
         if(mincost>cost){mincost=cost;ret_number=i;}
         }    
     }
@@ -131,13 +134,25 @@ int main(){
     int cand[1000];
     int eat,bite,number;
     init(cand);
+    
     for(int i=0;;i++){
+        
     if(i==0){number=12;}
     else{    
     number=search(cand);
+    }    
+    if(number<100){
+    if(number==12&&i>0){
+        for(int k=0;k<1000;k++){
+            if(cand[k]==1){number=k;break;}
+        }
     }
     if(number<100){    
     printf("Your_Number is 0%d ?\n",number);
+    }
+    else{
+    printf("Your_Number is %d ?\n",number);    
+    }    
     }
     else{
     printf("Your_Number is %d ?\n",number);    
@@ -148,7 +163,7 @@ int main(){
     scanf("%d",&bite);
     filter(cand,eat,bite,number);
     int ev=evaluate(cand);    
-    printf("score=%d\n",ev);
+    printf("score=%d\n",ev);   
     if(ev==0){printf("error!\n");break;}    
     if(eat==3){break;}    
     }
