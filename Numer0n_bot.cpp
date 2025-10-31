@@ -108,13 +108,14 @@ int search(int cand[1000]){
 
     for(int i=0;i<1000;i++){
         int cost=-1;
-        for(int j=0;j<1000;j++){
-            if(cand[j]==1){
+        for(int e=0;e<=3;e++){
+            for(int b=0;b<=3;b++){
+            if(e+b>=4){continue;}    
             int tmp_cand[1000];
             memcpy(tmp_cand,cand,sizeof(tmp_cand));
-            filter(tmp_cand,calc_eat(i,j),calc_bite(i,j),i);
+            filter(tmp_cand,e,b,i);
             int ev=evaluate(tmp_cand);
-            if(ev>cost){cost=ev;}    
+            if(ev>cost){cost=ev;}
             }
         }
         int n1=i/100;
