@@ -110,7 +110,8 @@ int search(int cand[1000]){
         int cost=-1;
         for(int e=0;e<=3;e++){
             for(int b=0;b<=3;b++){
-            if(e+b>=4){continue;}    
+            if(e+b>=4){continue;}
+            if(e==2&&b==1){continue;}    
             int tmp_cand[1000];
             memcpy(tmp_cand,cand,sizeof(tmp_cand));
             filter(tmp_cand,e,b,i);
